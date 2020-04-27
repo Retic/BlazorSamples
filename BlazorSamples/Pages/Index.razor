@@ -1,0 +1,14 @@
+﻿@page "/"
+
+@using Samples.Models;
+
+<Samples.LikertComponent LikerSet="Likert" EnableHeader="true"></Samples.LikertComponent>
+<hr />
+<Samples.LikertComponent LikerSet="LikertSlider"></Samples.LikertComponent>
+
+
+@code {
+
+    LikertModel LikertSlider = new LikertModel(8, new string[] { "Question A", "Question B", "Question C", "Question D", "Question E" });
+    LikertModel Likert = new LikertModel(new string[] { "A Lot", "Somwhat", "Meh", "No", "Nothing" }, new string[] { "Question A", "Question B", "Question C", "Question D", "Question E" });
+}

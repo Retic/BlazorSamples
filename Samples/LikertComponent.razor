@@ -1,0 +1,75 @@
+﻿
+
+<div class="container">
+
+    @if (EnableHeader)
+    {
+        <div class="row">
+            <div class="col-2">
+
+            </div>
+            @foreach (var column in LikerSet.Scale)
+            {
+                <div class="col-2">
+                    @column.Value
+                </div>
+            }
+        </div>
+    }
+
+    @foreach (var row in LikerSet.Rows)
+    {
+        <div class="row">
+            <div class="col-2">
+                @row.Question
+            </div>
+            @if (!EnableHeader)
+            {
+                <div class="col-10">
+                    <input type="range" min="1" max="@row.Range" @bind-value="row.Answer" class="likert-slider">
+                </div>
+            }
+            else
+            {
+
+                @foreach (var value in LikerSet.Scale)
+                {
+                    <div class="col-2">
+                        <span class="dot" @onclick="() => { row.Answer = value.Key; }">
+                            @(row.Answer == value.Key ? "X" : "")
+                        </span>
+                    </div>
+                }
+
+            }
+            
+
+
+
+        </div>
+    }
+</div>
+
+
+
+
+
+
+@code {
+
+    [Parameter]
+    public LikertModel LikerSet { get; set; }
+
+    [Parameter]
+    public bool EnableHeader { get; set; }
+
+    private string getOnCss(bool val)
+    {
+        return val ? "badge-primary" : "badge-secondary";
+    }
+
+    private string getOffcss(bool val)
+    {
+        return !val ? "badge-primary" : "badge-secondary";
+    }
+}
